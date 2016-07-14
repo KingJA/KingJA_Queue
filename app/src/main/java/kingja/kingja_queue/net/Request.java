@@ -1,4 +1,4 @@
-package kingja.kingja_queue;
+package kingja.kingja_queue.net;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +15,7 @@ public abstract class Request<T> implements Comparable {
     protected Map<String, String> param = new HashMap<>();
     protected String method;
     private Response.ErrorListener errorListener;
+    private boolean cacheAble=true;
 
     protected Request(String method, String url, Response.ErrorListener errorListener) {
         this.method = method;
@@ -51,5 +52,17 @@ public abstract class Request<T> implements Comparable {
         if (errorListener != null) {
             errorListener.onErrorResponse(error);
         }
+    }
+
+    public boolean isCacheAble() {
+        return cacheAble;
+    }
+
+    public void setCacheAble(boolean cacheAble) {
+        this.cacheAble = cacheAble;
+    }
+
+    public String getCacheKey() {
+        return method + ":" + url;
     }
 }

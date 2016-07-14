@@ -1,4 +1,4 @@
-package kingja.kingja_queue;
+package kingja.kingja_queue.net;
 
 /**
  * 项目名称：常用工具类

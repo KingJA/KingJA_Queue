@@ -6,6 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import kingja.kingja_queue.net.Response;
+import kingja.kingja_queue.net.Volley;
+import kingja.kingja_queue.net.VolleyNetLoader;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -21,11 +25,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onStart(View view) {
 
-        RequestQueue.getInstance().start();
+        Volley.newRequestQueue(this);
     }
 
     public void onChange(View view) {
-        JsonRequest<Result> request = new JsonRequest<>("GET", url, Result.class, new Response.Listener<Result>() {
+        VolleyNetLoader volleyNetLoader = new VolleyNetLoader();
+        volleyNetLoader.loadNet(this,"GET", url, Result.class, new Response.Listener<Result>() {
             @Override
             public void onResponse(Result response) {
                 Log.e(TAG, "onResponse: "+response.toString());
@@ -34,15 +39,13 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(Exception e) {
-                Log.e(TAG, "onErrorResponse: "+e.getMessage());
+                Log.e(TAG, "onErrorResponse : "+e.getMessage());
                 tv.setText(e.getMessage());
             }
         });
-        RequestQueue.getInstance().add(request);
     }
 
     public void onQuit(View view) {
-        RequestQueue.getInstance().stop();
     }
 
 }

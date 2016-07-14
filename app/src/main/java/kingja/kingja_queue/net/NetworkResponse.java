@@ -1,4 +1,4 @@
-package kingja.kingja_queue;
+package kingja.kingja_queue.net;
 
 import java.io.Serializable;
 

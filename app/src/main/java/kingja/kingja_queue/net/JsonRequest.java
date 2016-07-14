@@ -1,4 +1,4 @@
-package kingja.kingja_queue;
+package kingja.kingja_queue.net;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -38,6 +38,10 @@ public class JsonRequest<T> extends Request<T>{
         }
     }
 
+    /**
+     * 成功响应的回调方法
+     * @param response
+     */
     @Override
     protected void deliverResponse(T response) {
         if (listener != null) {
